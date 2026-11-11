@@ -8,12 +8,13 @@ $(function () {
 function setupRegistration() {
     const form = $("#register-form");
     const feedback = $("#register-feedback");
+    const emailInput = $("#register-email");
     const strength = $("#password-strength");
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function validate() {
         const name = $("#register-name").val().trim();
-        const email = $("#register-email").val().trim();
+        const email = emailInput.val().trim();
         const password = $("#register-password").val();
         const confirmation = $("#register-confirm").val();
 
@@ -29,7 +30,9 @@ function setupRegistration() {
         strength.text(passwordLevel ? `Password strength: ${passwordLevel}` : "");
 
         if (!name) return "Enter your name.";
-        if (!emailPattern.test(email)) return "Enter a valid email address.";
+        if (!emailPattern.test(email) || emailInput[0].validity.typeMismatch) {
+            return "Enter a valid email address.";
+        }
         if (!password.trim()) return "Enter a password.";
         if (password !== confirmation) return "Passwords must match.";
         return "";
@@ -48,11 +51,13 @@ function setupRegistration() {
 
     form.on("submit", function (event) {
         event.preventDefault();
+
         const error = validate();
         if (error) {
             showFeedback(error, true);
             return;
         }
+
         this.reset();
         strength.empty();
         showFeedback("Registration form passed validation.", false);
@@ -92,25 +97,29 @@ function setupJobSearch() {
 
     filters.on("click", function () {
         category = this.dataset.category;
+
         filters.each(function () {
             const selected = this.dataset.category === category;
             $(this).attr("aria-pressed", String(selected))
                 .toggleClass("btn-primary", selected)
                 .toggleClass("btn-outline-secondary", !selected);
         });
+
         filterJobs();
     });
 }
 
 function setupJobTable() {
+    const dialog = document.getElementById("job-dialog");
+    if (!dialog) return;
+
     const form = $("#job-form");
     const tableBody = $("#job-table tbody");
     const title = $("#job-title");
     const experience = $("#job-experience");
     const salary = $("#job-salary");
-    const save = $("#job-save");
-    const cancel = $("#job-cancel");
     const feedback = $("#job-feedback");
+    const formError = $("#job-form-error");
     let editingRow = null;
 
     function addButtons(cell) {
@@ -120,15 +129,38 @@ function setupJobTable() {
         );
     }
 
-    function resetForm() {
+    function openForm(row = null) {
+        editingRow = row;
         form[0].reset();
-        editingRow = null;
-        save.text("Add position");
-        cancel.prop("hidden", true);
+        formError.empty();
+        feedback.empty();
+
+        if (row) {
+            const cells = row.children();
+            title.val(cells.eq(0).text());
+            experience.val(cells.eq(1).text());
+            salary.val(cells.eq(2).text().replace(/\D/g, ""));
+        }
+
+        $("#job-dialog-title").text(row ? "Edit position" : "Add position");
+        $("#job-save").text(row ? "Save changes" : "Add position");
+        dialog.showModal();
     }
 
     tableBody.find("tr").each(function () {
         addButtons($(this).children().last());
+    });
+
+    $("#job-add").on("click", function () {
+        openForm();
+    });
+
+    $("#job-cancel").on("click", function () {
+        dialog.close();
+    });
+
+    tableBody.on("click", ".edit-job", function () {
+        openForm($(this).closest("tr"));
     });
 
     form.on("submit", function (event) {
@@ -136,58 +168,33 @@ function setupJobTable() {
 
         const position = title.val().trim();
         const years = experience.val().trim();
+
         if (!position || !years) {
-            feedback.text("Enter a position and experience.");
+            formError.text("Enter a position and experience.");
             return;
         }
 
-        const formattedSalary = `${Number(salary.val()).toLocaleString("en-US")} ₸`;
+        const row = editingRow || $("<tr>").append("<td></td><td></td><td></td><td></td>");
+        const cells = row.children();
 
-        if (editingRow) {
-            const cells = editingRow.children();
-            cells.eq(0).text(position);
-            cells.eq(1).text(years);
-            cells.eq(2).text(formattedSalary);
-            feedback.text("Position updated.");
-        } else {
-            const actions = $("<td>");
-            addButtons(actions);
-            $("<tr>").append(
-                $("<td>").text(position),
-                $("<td>").text(years),
-                $("<td>").text(formattedSalary),
-                actions
-            ).appendTo(tableBody);
-            feedback.text("Position added.");
+        cells.eq(0).text(position);
+        cells.eq(1).text(years);
+        cells.eq(2).text(Number(salary.val()).toLocaleString("en-US") + " ₸");
+
+        if (!editingRow) {
+            addButtons(cells.eq(3));
+            tableBody.append(row);
         }
 
-        resetForm();
-    });
-
-    tableBody.on("click", ".edit-job", function () {
-        editingRow = $(this).closest("tr");
-        const cells = editingRow.children();
-        title.val(cells.eq(0).text());
-        experience.val(cells.eq(1).text());
-        salary.val(cells.eq(2).text().replace(/\D/g, ""));
-        save.text("Save changes");
-        cancel.prop("hidden", false);
-        feedback.empty();
-        title.trigger("focus");
+        feedback.text(editingRow ? "Position updated." : "Position added.");
+        dialog.close();
     });
 
     tableBody.on("click", ".delete-job", function () {
-        const row = $(this).closest("tr");
         if (!window.confirm("Delete this position?")) return;
 
-        if (editingRow && editingRow[0] === row[0]) resetForm();
-        row.remove();
+        $(this).closest("tr").remove();
         feedback.text("Position deleted.");
-    });
-
-    cancel.on("click", function () {
-        resetForm();
-        feedback.empty();
     });
 }
 
@@ -213,6 +220,7 @@ function setupGallery() {
 
     function closeGallery(event) {
         event.preventDefault();
+
         $(dialog).stop(true).animate({ opacity: 0 }, 150, function () {
             dialog.close();
             $(dialog).css("opacity", "");

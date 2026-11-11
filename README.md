@@ -31,4 +31,4 @@ This is our planned division of work. Before submission, we will check that it m
 How to run
 Download the project folder and open index.html in a browser. Keep the css, fonts and images folders in the same project folder. Bootstrap and the font are included locally.
 Website link
-GitHub Pages https://elnur-ctrl.github.io/Midterm-project/
+GitHub Pages https://elnur-ctrl.github.io/Endterm-project/

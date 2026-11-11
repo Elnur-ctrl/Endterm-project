@@ -218,3 +218,11 @@ footer p {
     max-height: 68vh;
     object-fit: contain;
 }
+
+#job-dialog {
+    width: min(92vw, 460px);
+}
+
+#job-dialog::backdrop {
+    background: rgb(0 0 0 / 65%);
+}

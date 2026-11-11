@@ -88,20 +88,26 @@
                 </div>
             </div>
         </div>
-        <h2>Compare positions</h2>
-        <form id="job-form" class="mb-3">
-            <label for="job-title">Position</label>
-            <input id="job-title" class="form-control" required>
+        <button id="job-add" class="btn btn-primary mb-3" type="button">Add position</button>
 
-            <label for="job-experience">Experience</label>
-            <input id="job-experience" class="form-control" required>
+        <dialog id="job-dialog" class="border-0 rounded p-4" aria-labelledby="job-dialog-title">
+            <h3 id="job-dialog-title">Position details</h3>
 
-            <label for="job-salary">Monthly salary (₸)</label>
-            <input id="job-salary" class="form-control" type="number" min="1" step="1" required>
+            <form id="job-form">
+                <label for="job-title">Position</label>
+                <input id="job-title" class="form-control" required autofocus>
 
-            <button id="job-save" class="btn btn-primary mt-3" type="submit">Add position</button>
-            <button id="job-cancel" class="btn btn-outline-secondary mt-3" type="button" hidden>Cancel</button>
-        </form>
+                <label for="job-experience">Experience</label>
+                <input id="job-experience" class="form-control" required>
+
+                <label for="job-salary">Monthly salary (₸)</label>
+                <input id="job-salary" class="form-control" type="number" min="1" step="1" required>
+
+                <p id="job-form-error" class="text-danger mt-2 mb-0" role="alert"></p>
+                <button id="job-save" class="btn btn-primary mt-3" type="submit">Save</button>
+                <button id="job-cancel" class="btn btn-outline-secondary mt-3" type="button">Cancel</button>
+            </form>
+        </dialog>
         <p id="job-feedback" role="status"></p>
 
         <div class="table-responsive">
