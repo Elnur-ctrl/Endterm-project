@@ -1,34 +1,93 @@
-Job Finding
-Project description
-Our topic is job finding in the IT field. We created a website where users can read about software engineering, cybersecurity and teaching roles in Astana. Each job card shows the position, experience, skills, location and monthly salary.
-The website has junior and senior positions, so users can compare different requirements. The listings and salaries are examples for this project, not confirmed vacancies.
-Group members
+# Job Finding
+
+## Project description
+
+Job Finding is a student website about IT jobs in Astana. Users can explore positions, compare salaries and experience, search for jobs and filter them by category.
+
+This endterm project extends our midterm website with JavaScript and jQuery. The job listings and salaries are examples.
+
+## Group members
+
 - Azamat Merzemkhan
 - Yerbol Berdalin
 - Yelnur Bizhan
-Pages
-- Home: introduces the website and explains the steps for choosing a job.
-- Jobs: shows four IT-related positions and a table for comparing experience and salaries.
-- Companies: gives information about Astana Hub, Astana IT University and the fictional company Qala Security.
-- About: explains the purpose of the website and gives advice before applying.
-- Contact: contains a form with name, email and message fields.
-All five pages have the same navigation menu and footer. Users can move between pages using the menu and open the official websites linked on the Companies page.
-Features and technologies
-We used HTML for the page structure, CSS for styling and Bootstrap 5.3.3 for the job card layout and utility classes. The HTML structure includes header, nav, main and footer. Our styles are in css/style.css.
-Flexbox aligns the logo and navigation menu. CSS Grid arranges the steps and company cards. The Jobs page uses Bootstrap columns to show three cards per row on large screens, two on medium screens and one on small screens.
-Media queries at 992px and 576px adjust the layout, headings and spacing. We also used three CSS color variables, relative positioning, hover and focus styles, and nth-child for alternating table rows. The project includes a local font and an image with lazy loading.
-The contact form uses required fields and an email input. It checks the entered values in the browser but does not send messages. The Endterm version uses JavaScript and jQuery. It adds a registration form with live validation and a password strength indicator, a case-insensitive job search with category filters, an editable comparison table, and a photo gallery with a lightbox and fade effects.
 
-Registration is a browser-only demo. Changes to the comparison table last until the page is reloaded.
-Individual contributions
-Azamat Merzemkhan
-Azamat worked on the Home and Jobs pages. He added the introduction, job cards and comparison table. His part included arranging the job cards with Bootstrap columns and adding the position details, skills and salaries.
-Yerbol Berdalin
-Yerbol worked on the Companies and About pages. He added company descriptions, locations and official website links. He also prepared the project description, goals and the list of steps to follow before applying.
-Yelnur Bizhan
-Yelnur worked on the Contact page and shared CSS. He added the form fields and validation attributes. His part also included the navigation layout, common colors, footer styles and media queries for smaller screens.
-This is our planned division of work. Before submission, we will check that it matches each member's actual contribution. Each member should understand all pages for the defence.
-How to run
-Download the project folder and open index.html in a browser. Keep the css, fonts and images folders in the same project folder. Bootstrap and the font are included locally.
-Website link
-GitHub Pages https://elnur-ctrl.github.io/Endterm-project/
+## Pages
+
+- Home: project introduction and workplace photo gallery.
+- Jobs: job cards, search, category filters and an editable comparison table.
+- Companies: information about companies and workplaces.
+- About: project goals and advice for applicants.
+- Contact: contact form and registration form.
+
+## Features
+
+### Registration form
+
+- Required name, email and password fields.
+- Email validation using a regular expression.
+- Weak, medium and strong password indicator.
+- Password confirmation check.
+- Real-time feedback and prevention of invalid submission.
+
+### Job search and filters
+
+- Search by position, skills or other job details.
+- Category buttons for development, cybersecurity and teaching.
+- Case-insensitive search.
+- Search and category filters work together without reloading the page.
+
+### Comparison table
+
+- Add a position using a modal form.
+- View positions, experience and monthly salaries.
+- Edit existing records.
+- Delete records after confirmation.
+
+### Image gallery
+
+- Responsive photo grid.
+- Click a photo to open a lightbox.
+- Previous and next buttons.
+- jQuery fade and animation effects.
+
+## Technologies
+
+- HTML5
+- CSS3
+- Bootstrap 5.3.3
+- JavaScript
+- jQuery 3.7.1
+- GitHub Pages
+
+## Individual contributions
+
+### Azamat Merzemkhan
+
+Worked on the Jobs page and the dynamic comparison table. Implemented adding, editing and deleting positions through a modal form. Also checked table inputs and confirmation before deleting records.
+
+### Yerbol Berdalin
+
+Worked on the Companies and About pages and the job search functionality. Implemented case-insensitive search, category filters and the message shown when no jobs match. Checked that search and category filters work together.
+
+### Yelnur Bizhan
+
+Worked on the Contact page, registration validation and the image gallery. Implemented email checks, password strength feedback and password confirmation. Added lightbox navigation and jQuery animation effects.
+
+All three members helped test the website, check the responsive layout and review the final version.
+
+## How to run
+
+Download the project and open index.html in a browser. Keep the css, js, fonts and images folders in the project directory.
+
+An internet connection is needed to load jQuery from the CDN.
+
+Registration is a demo and does not create an account or send data to a server. Changes to the comparison table are reset when the page is reloaded.
+
+## Website
+
+https://elnur-ctrl.github.io/Endterm-project/
+
+## Repository
+
+https://github.com/Elnur-ctrl/Endterm-project
