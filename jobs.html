@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs - Job Finding</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
 </head>
+
 <body>
     <header class="container">
         <a class="logo" href="index.html">Job Finding</a>
         <nav>
-                <a href="index.html">Home</a>
-                <a class="active" href="jobs.html">Jobs</a>
-                <a href="companies.html">Companies</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+            <a href="index.html">Home</a>
+            <a class="active" href="jobs.html">Jobs</a>
+            <a href="companies.html">Companies</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
     </header>
     <main class="container">
         <h1>IT jobs in Astana</h1>
         <p>Software engineering, cybersecurity and teaching roles.</p>
         <p class="tag">Example listings. Vacancies and salaries are illustrative, not confirmed by employers.</p>
-        <div class="row">
+        <label for="job-search">Search jobs</label>
+        <input id="job-search" class="form-control mb-2" type="search" placeholder="Search by title or skill">
+        <div class="d-flex flex-wrap gap-2 mb-3" id="job-filters">
+            <button type="button" class="btn btn-primary" data-category="all" aria-pressed="true">All</button>
+            <button type="button" class="btn btn-outline-secondary" data-category="development"
+                aria-pressed="false">Development</button>
+            <button type="button" class="btn btn-outline-secondary" data-category="security"
+                aria-pressed="false">Cybersecurity</button>
+            <button type="button" class="btn btn-outline-secondary" data-category="teaching"
+                aria-pressed="false">Teaching</button>
+        </div>
+        <p id="job-search-empty" role="status" hidden>No matching jobs.</p>
+        <div class="row" id="job-cards">
             <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="box" id="junior">
                     <span class="tag">Full-time · 0–1 year</span>
@@ -73,13 +89,59 @@
             </div>
         </div>
         <h2>Compare positions</h2>
-        <table>
-            <tr><th>Position</th><th>Experience</th><th>Monthly salary</th></tr>
-            <tr><td>Junior Software Engineer</td><td>0–1 year</td><td>500,000 ₸</td></tr>
-            <tr><td>Senior Software Engineer</td><td>3+ years</td><td>1,000,000 ₸</td></tr>
-            <tr><td>Cybersecurity Analyst</td><td>1–3 years</td><td>800,000 ₸</td></tr>
-            <tr><td>Computer Science Lecturer</td><td>Teaching experience</td><td>650,000 ₸</td></tr>
-        </table>
+        <form id="job-form" class="mb-3">
+            <label for="job-title">Position</label>
+            <input id="job-title" class="form-control" required>
+
+            <label for="job-experience">Experience</label>
+            <input id="job-experience" class="form-control" required>
+
+            <label for="job-salary">Monthly salary (₸)</label>
+            <input id="job-salary" class="form-control" type="number" min="1" step="1" required>
+
+            <button id="job-save" class="btn btn-primary mt-3" type="submit">Add position</button>
+            <button id="job-cancel" class="btn btn-outline-secondary mt-3" type="button" hidden>Cancel</button>
+        </form>
+        <p id="job-feedback" role="status"></p>
+
+        <div class="table-responsive">
+            <table id="job-table">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Experience</th>
+                        <th>Monthly salary</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Junior Software Engineer</td>
+                        <td>0–1 year</td>
+                        <td>500,000 ₸</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Senior Software Engineer</td>
+                        <td>3+ years</td>
+                        <td>1,000,000 ₸</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Cybersecurity Analyst</td>
+                        <td>1–3 years</td>
+                        <td>800,000 ₸</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Computer Science Lecturer</td>
+                        <td>Teaching experience</td>
+                        <td>650,000 ₸</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </main>
     <footer class="text-center p-4">
         <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
@@ -87,4 +149,5 @@
         <p>© 2026 Job Finding. Student project.</p>
     </footer>
 </body>
+
 </html>

@@ -1,36 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Job Finding</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
 </head>
+
 <body>
     <header class="container">
         <a class="logo" href="index.html">Job Finding</a>
         <nav>
-                <a class="active" href="index.html">Home</a>
-                <a href="jobs.html">Jobs</a>
-                <a href="companies.html">Companies</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+            <a class="active" href="index.html">Home</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="companies.html">Companies</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
     </header>
     <main class="container">
         <div id="intro">
             <h1>Job Finding</h1>
-            <p>Find software engineering, cybersecurity and teaching roles in Astana. Compare skills, experience and salaries.</p>
+            <p>Find software engineering, cybersecurity and teaching roles in Astana. Compare skills, experience and
+                salaries.</p>
             <a class="btn btn-primary" href="jobs.html">View jobs</a>
         </div>
         <h2 class="mt-3">How it works</h2>
         <div class="steps">
-            <div class="box"><h3>1. Explore</h3><p>Choose a role in your field.</p></div>
-            <div class="box"><h3>2. Compare</h3><p>Check experience, skills and salary.</p></div>
-            <div class="box"><h3>3. Prepare</h3><p>Write your CV and contact us.</p></div>
+            <div class="box">
+                <h3>1. Explore</h3>
+                <p>Choose a role in your field.</p>
+            </div>
+            <div class="box">
+                <h3>2. Compare</h3>
+                <p>Check experience, skills and salary.</p>
+            </div>
+            <div class="box">
+                <h3>3. Prepare</h3>
+                <p>Write your CV and contact us.</p>
+            </div>
         </div>
-        <img class="work mt-3" src="images/work.png" alt="Computer on a desk" loading="lazy">
+        <section class="mt-4" aria-labelledby="gallery-title">
+            <h2 id="gallery-title">Workplace gallery</h2>
+            <div class="row g-3">
+                <div class="col-12 col-sm-4">
+                    <button type="button" class="gallery-thumb btn p-0 border w-100">
+                        <img src="images/work.png" alt="Computer on a desk" loading="lazy">
+                    </button>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <button type="button" class="gallery-thumb btn p-0 border w-100">
+                        <img src="images/office.jpg" alt="Open office workspace" loading="lazy">
+                    </button>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <button type="button" class="gallery-thumb btn p-0 border w-100">
+                        <img src="images/computer-lab.jpg" alt="Students working at a computer" loading="lazy">
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <dialog id="gallery-dialog" class="border-0 rounded p-3" aria-label="Workplace photo">
+            <div class="d-flex justify-content-end mb-2">
+                <button id="gallery-close" class="btn-close" type="button" aria-label="Close"></button>
+            </div>
+            <img id="gallery-photo" src="images/work.png" alt="Computer on a desk">
+            <div class="d-flex justify-content-between mt-3">
+                <button id="gallery-prev" class="btn btn-outline-secondary" type="button">← Previous</button>
+                <button id="gallery-next" class="btn btn-outline-secondary" type="button">Next →</button>
+            </div>
+        </dialog>
     </main>
     <footer class="text-center p-4">
         <p>Contact: <a href="mailto:AITU-Progect.com">AITU-Progect.com</a></p>
@@ -38,4 +82,5 @@
         <p>© 2026 Job Finding. Student project.</p>
     </footer>
 </body>
+
 </html>

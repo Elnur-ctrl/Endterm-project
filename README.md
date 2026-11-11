@@ -17,7 +17,9 @@ Features and technologies
 We used HTML for the page structure, CSS for styling and Bootstrap 5.3.3 for the job card layout and utility classes. The HTML structure includes header, nav, main and footer. Our styles are in css/style.css.
 Flexbox aligns the logo and navigation menu. CSS Grid arranges the steps and company cards. The Jobs page uses Bootstrap columns to show three cards per row on large screens, two on medium screens and one on small screens.
 Media queries at 992px and 576px adjust the layout, headings and spacing. We also used three CSS color variables, relative positioning, hover and focus styles, and nth-child for alternating table rows. The project includes a local font and an image with lazy loading.
-The contact form uses required fields and an email input. It checks the entered values in the browser but does not send messages. No JavaScript or backend is used.
+The contact form uses required fields and an email input. It checks the entered values in the browser but does not send messages. The Endterm version uses JavaScript and jQuery. It adds a registration form with live validation and a password strength indicator, a case-insensitive job search with category filters, an editable comparison table, and a photo gallery with a lightbox and fade effects.
+
+Registration is a browser-only demo. Changes to the comparison table last until the page is reloaded.
 Individual contributions
 Azamat Merzemkhan
 Azamat worked on the Home and Jobs pages. He added the introduction, job cards and comparison table. His part included arranging the job cards with Bootstrap columns and adding the position details, skills and salaries.

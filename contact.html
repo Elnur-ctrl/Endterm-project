@@ -6,6 +6,8 @@
     <title>Contact - Job Finding</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
     <header class="container">
@@ -31,6 +33,29 @@
             <input id="message" name="message" type="text" required>
             <button class="btn btn-primary mt-3" type="submit">Check form</button>
         </form>
+        <section class="mt-4" aria-labelledby="registration-title">
+    <h2 id="registration-title">Register</h2>
+    <form id="register-form" novalidate>
+        <label for="register-name">Name</label>
+        <input id="register-name" class="form-control" autocomplete="name" required>
+
+        <label for="register-email">Email</label>
+        <input id="register-email" class="form-control" type="email"
+               autocomplete="email" required>
+
+        <label for="register-password">Password</label>
+        <input id="register-password" class="form-control" type="password"
+               autocomplete="new-password" aria-describedby="password-strength" required>
+        <p id="password-strength" class="mt-1" aria-live="polite"></p>
+
+        <label for="register-confirm">Confirm password</label>
+        <input id="register-confirm" class="form-control" type="password"
+               autocomplete="new-password" required>
+
+        <button class="btn btn-primary mt-3" type="submit">Register</button>
+        <p id="register-feedback" class="mt-2" role="status"></p>
+    </form>
+</section>
     </main>
     <footer class="text-center p-4">
         <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
