@@ -1,93 +1,45 @@
 # Job Finding
 
-## Project description
-
-Job Finding is a student website about IT jobs in Astana. Users can explore positions, compare salaries and experience, search for jobs and filter them by category.
-
-This endterm project extends our midterm website with JavaScript and jQuery. The job listings and salaries are examples.
+A Front End final project about IT careers in Astana and remote software jobs. It extends the same Midterm and Endterm website.
 
 ## Group members
-
 - Azamat Merzemkhan
 - Yerbol Berdalin
 - Yelnur Bizhan
 
 ## Pages
-
-- Home: project introduction and workplace photo gallery.
-- Jobs: job cards, search, category filters and an editable comparison table.
-- Companies: information about companies and workplaces.
-- About: project goals and advice for applicants.
-- Contact: contact form and registration form.
+- Home: introduction and workplace gallery.
+- Jobs: example Astana jobs, search/filter, comparison table and live remote jobs.
+- Companies: workplaces and official links.
+- About: goals, FAQ and project credits.
+- Contact: contact/registration forms and demo sign-in.
 
 ## Features
+- Responsive HTML5, external CSS, Flexbox/Grid and Bootstrap.
+- Light/Dark theme saved in localStorage across all pages and refreshes.
+- Demo sign-in with validated name/email, persistent user interface and sign-out. Only name/email are stored; no password or server account.
+- Six FAQ questions using jQuery slideToggle() and +/− indicators.
+- Remotive public API using fetch(), JSON processing, search and job-type filters, loading/empty/error states and retry. Results are cached for six hours to reduce API requests.
+- Endterm features retained: email/password validation, job search and categories, CRUD comparison table and lightbox gallery.
 
-### Registration form
+## Technologies and running
+HTML5, CSS3, Bootstrap 5.3.3, JavaScript and jQuery 3.7.1. Bootstrap, jQuery, fonts and images are included locally. Open index.html or serve the folder with a local web server. An internet connection is required for live API data.
 
-- Required name, email and password fields.
-- Email validation using a regular expression.
-- Weak, medium and strong password indicator.
-- Password confirmation check.
-- Real-time feedback and prevention of invalid submission.
+Local Astana listings are examples. Real remote listings come from [Remotive](https://remotive.com/); applications are made on the original listing. Demo table edits reset on refresh.
 
-### Job search and filters
+## Team responsibilities
+The following responsibilities organise the final project review and defence:
+- Azamat Merzemkhan: Jobs page, CRUD and remote API integration.
+- Yerbol Berdalin: Companies/About content, FAQ and search/filter review.
+- Yelnur Bizhan: Contact forms, demo sign-in and shared theme/gallery review.
 
-- Search by position, skills or other job details.
-- Category buttons for development, cybersecurity and teaching.
-- Case-insensitive search.
-- Search and category filters work together without reloading the page.
+Each member must review the final code and confirm their actual contribution before submission.
 
-### Comparison table
+## Credits
+OpenAI ChatGPT assisted with code suggestions, documentation and testing during final project development. This support is also acknowledged on the About page and in the project report.
 
-- Add a position using a modal form.
-- View positions, experience and monthly salaries.
-- Edit existing records.
-- Delete records after confirmation.
+API documentation: https://github.com/remotive-com/remote-jobs-api
 
-### Image gallery
+Website: https://elnur-ctrl.github.io/Endterm-project/
 
-- Responsive photo grid.
-- Click a photo to open a lightbox.
-- Previous and next buttons.
-- jQuery fade and animation effects.
-
-## Technologies
-
-- HTML5
-- CSS3
-- Bootstrap 5.3.3
-- JavaScript
-- jQuery 3.7.1
-- GitHub Pages
-
-## Individual contributions
-
-### Azamat Merzemkhan
-
-Worked on the Jobs page and the dynamic comparison table. Implemented adding, editing and deleting positions through a modal form. Also checked table inputs and confirmation before deleting records.
-
-### Yerbol Berdalin
-
-Worked on the Companies and About pages and the job search functionality. Implemented case-insensitive search, category filters and the message shown when no jobs match. Checked that search and category filters work together.
-
-### Yelnur Bizhan
-
-Worked on the Contact page, registration validation and the image gallery. Implemented email checks, password strength feedback and password confirmation. Added lightbox navigation and jQuery animation effects.
-
-All three members helped test the website, check the responsive layout and review the final version.
-
-## How to run
-
-Download the project and open index.html in a browser. Keep the css, js, fonts and images folders in the project directory.
-
-An internet connection is needed to load jQuery from the CDN.
-
-Registration is a demo and does not create an account or send data to a server. Changes to the comparison table are reset when the page is reloaded.
-
-## Website
-
-https://elnur-ctrl.github.io/Endterm-project/
-
-## Repository
-
-https://github.com/Elnur-ctrl/Endterm-project
+Repository: https://github.com/Elnur-ctrl/Endterm-project

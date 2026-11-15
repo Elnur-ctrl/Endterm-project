@@ -226,3 +226,103 @@ footer p {
 #job-dialog::backdrop {
     background: rgb(0 0 0 / 65%);
 }
+/* Final project */
+:root {
+    --page: #ffffff;
+    --line: #d2d8d3;
+}
+html[data-bs-theme="dark"] {
+    --blue: #9cdbb9;
+    --light: #23352c;
+    --text: #edf4ef;
+    --page: #16221c;
+    --line: #506559;
+    color-scheme: dark;
+}
+body {
+    background: var(--page);
+}
+header {
+    flex-wrap: wrap;
+    gap: 18px;
+}
+.header-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+#account-status {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+header, .box, th, td {
+    border-color: var(--line);
+}
+html[data-bs-theme="dark"] input,
+html[data-bs-theme="dark"] select,
+html[data-bs-theme="dark"] dialog {
+    background: var(--page);
+    color: var(--text);
+    border-color: var(--line);
+}
+html[data-bs-theme="dark"] .btn-primary {
+    background: #9cdbb9;
+    color: #14251b;
+    border-color: #9cdbb9;
+}
+html[data-bs-theme="dark"] .btn-primary:hover {
+    background: #b8ebcd;
+}
+html[data-bs-theme="dark"] .btn-outline-secondary {
+    color: #e1eee5;
+    border-color: #91aa9b;
+}
+html[data-bs-theme="dark"] .btn-outline-danger,
+html[data-bs-theme="dark"] .text-danger {
+    color: #ff9f9f !important;
+}
+html[data-bs-theme="dark"] .text-success {
+    color: #9cdbb9 !important;
+}
+.faq-item {
+    border-bottom: 1px solid var(--line);
+}
+.faq-item h3 {
+    margin: 0;
+}
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    border: 0;
+    padding: 18px 0;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    font-size: 18px;
+}
+.faq-indicator {
+    color: var(--blue);
+    font-size: 24px;
+}
+.faq-answer {
+    display: none;
+    padding: 0 0 12px;
+}
+.remote-card {
+    overflow-wrap: anywhere;
+}
+[hidden] {
+    display: none !important;
+}
+@media (max-width: 576px) {
+    .header-tools {
+        justify-content: center;
+    }
+    #api-results .box {
+        padding: 16px;
+    }
+}

@@ -6,6 +6,8 @@
     <title>About - Job Finding</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.7.1.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <header class="container">
@@ -17,6 +19,12 @@
                 <a class="active" href="about.html">About</a>
                 <a href="contact.html">Contact</a>
         </nav>
+        <div class="header-tools">
+            <button id="theme-toggle" class="btn btn-outline-secondary btn-sm" type="button" aria-pressed="false">Dark mode</button>
+            <a id="sign-in-link" href="contact.html#sign-in" class="btn btn-primary btn-sm">Sign in</a>
+            <span id="account-status" role="status"></span>
+            <button id="sign-out" class="btn btn-outline-secondary btn-sm" type="button" hidden>Sign out</button>
+        </div>
     </header>
     <main class="container">
         <h1>About Job Finding</h1>
@@ -33,11 +41,44 @@
             <li>Check the required experience.</li>
             <li>Read the job requirements.</li>
         </ol>
+        <section id="faq" class="mt-4" aria-labelledby="faq-title">
+            <h2 id="faq-title">Frequently asked questions</h2>
+            <div class="faq-item">
+                <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-1">Are the Astana job listings real vacancies?<span class="faq-indicator" aria-hidden="true">+</span></button></h3>
+                <div id="faq-answer-1" class="faq-answer"><p>The four Astana listings are examples for this student project. The remote jobs section loads real listings from Remotive.</p></div>
+            </div>
+            <div class="faq-item">
+                <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-2">Can I apply for a remote job here?<span class="faq-indicator" aria-hidden="true">+</span></button></h3>
+                <div id="faq-answer-2" class="faq-answer"><p>Open a listing on Remotive to read its requirements and application instructions. Applications are handled by the original provider.</p></div>
+            </div>
+            <div class="faq-item">
+                <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-3">Can students find entry-level roles?<span class="faq-indicator" aria-hidden="true">+</span></button></h3>
+                <div id="faq-answer-3" class="faq-answer"><p>Search for junior, intern or entry-level roles and compare the required experience before applying.</p></div>
+            </div>
+            <div class="faq-item">
+                <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-4">Does signing in create an account?<span class="faq-indicator" aria-hidden="true">+</span></button></h3>
+                <div id="faq-answer-4" class="faq-answer"><p>No. Demo sign-in stores your name and email only in this browser. It is not a verified account or secure authentication service.</p></div>
+            </div>
+            <div class="faq-item">
+                <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-5">How can I change the website theme?<span class="faq-indicator" aria-hidden="true">+</span></button></h3>
+                <div id="faq-answer-5" class="faq-answer"><p>Use the Light mode or Dark mode button in the header. Your choice is saved and applies to all pages.</p></div>
+            </div>
+            <div class="faq-item">
+                <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-6">Why are remote jobs sometimes unavailable?<span class="faq-indicator" aria-hidden="true">+</span></button></h3>
+                <div id="faq-answer-6" class="faq-answer"><p>The API may be unavailable or the connection may fail. Use Load jobs to retry. Loaded listings are cached for six hours to reduce requests.</p></div>
+            </div>
+        </section>
+        <section id="credits" class="mt-4">
+            <h2>Project credits</h2>
+            <p>Team: Azamat Merzemkhan, Yerbol Berdalin and Yelnur Bizhan.</p>
+            <p>OpenAI ChatGPT assisted with code suggestions, documentation and testing during final project development.</p>
+            <p>Remote vacancies are provided by <a href="https://remotive.com/">Remotive</a>. Local listings are examples.</p>
+        </section>
     </main>
     <footer class="text-center p-4">
         <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
         <a href="https://www.instagram.com/">Instagram</a> | <a href="https://www.linkedin.com/">LinkedIn</a>
-        <p>© 2026 Job Finding. Student project.</p>
+        <p>© 2026 Job Finding. Student project. <a href="about.html#credits">Project credits</a></p>
     </footer>
 </body>
 </html>

@@ -1,4 +1,8 @@
 $(function () {
+    setupTheme();
+    setupSignIn();
+    setupFAQ();
+    setupRemoteJobs();
     setupRegistration();
     setupJobSearch();
     setupJobTable();
@@ -33,7 +37,7 @@ function setupRegistration() {
         if (!emailPattern.test(email) || emailInput[0].validity.typeMismatch) {
             return "Enter a valid email address.";
         }
-        if (!password.trim()) return "Enter a password.";
+        if (password.length < 8 || !password.trim()) return "Use at least 8 characters for your password.";
         if (password !== confirmation) return "Passwords must match.";
         return "";
     }
@@ -174,6 +178,12 @@ function setupJobTable() {
             return;
         }
 
+        const salaryValue = Number(salary.val());
+        if (!Number.isFinite(salaryValue) || salaryValue < 1 || salaryValue % 1 !== 0) {
+            formError.text("Enter a positive whole-number salary.");
+            return;
+        }
+
         const row = editingRow || $("<tr>").append("<td></td><td></td><td></td><td></td>");
         const cells = row.children();
 
@@ -237,4 +247,201 @@ function setupGallery() {
     $("#gallery-next").on("click", function () { move(1); });
     $("#gallery-close").on("click", closeGallery);
     $(dialog).on("cancel", closeGallery);
+}
+
+// Final project features
+function readStorage(key) {
+    try {
+        return localStorage.getItem(key);
+    } catch (error) {
+        return null;
+    }
+}
+
+function saveStorage(key, value) {
+    try {
+        localStorage.setItem(key, value);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function setupTheme() {
+    let theme = readStorage("job-theme") === "dark" ? "dark" : "light";
+    function applyTheme() {
+        document.documentElement.setAttribute("data-bs-theme", theme);
+        $("#theme-toggle").text(theme === "dark" ? "Light mode" : "Dark mode");
+        $("#theme-toggle").attr("aria-pressed", String(theme === "dark"));
+    }
+    applyTheme();
+    $("#theme-toggle").on("click", function () {
+        theme = theme === "dark" ? "light" : "dark";
+        applyTheme();
+        if (!saveStorage("job-theme", theme)) {
+            alert("Your browser cannot save the theme. It will reset on refresh.");
+        }
+    });
+}
+
+function setupSignIn() {
+    let user = null;
+    try {
+        const stored = JSON.parse(readStorage("job-user"));
+        if (stored && typeof stored.name === "string" && typeof stored.email === "string") {
+            user = stored;
+        }
+    } catch (error) {
+        user = null;
+    }
+    function updateAccount() {
+        $("#account-status").text(user ? "Hello, " + user.name : "");
+        $("#sign-in-link").prop("hidden", Boolean(user));
+        $("#sign-out").prop("hidden", !user);
+        $("#sign-in-form").prop("hidden", Boolean(user));
+        $("#signed-in-message").prop("hidden", !user).text(user ? "Signed in as " + user.name + ". You can sign out in the header." : "");
+    }
+    updateAccount();
+    $("#sign-in-form").on("submit", function (event) {
+        event.preventDefault();
+        const name = $("#login-name").val().trim();
+        const email = $("#login-email").val().trim();
+        const feedback = $("#login-feedback");
+        feedback.removeClass("text-success").addClass("text-danger");
+        if (!name || name.length > 60) {
+            feedback.text("Enter your name, up to 60 characters.");
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 120) {
+            feedback.text("Enter a valid email address.");
+            return;
+        }
+        const account = { name: name, email: email };
+        if (!saveStorage("job-user", JSON.stringify(account))) {
+            feedback.text("Sign-in could not be saved. Allow browser storage and try again.");
+            return;
+        }
+        user = account;
+        this.reset();
+        updateAccount();
+        feedback.removeClass("text-danger").addClass("text-success").text("Demo sign-in saved in this browser.");
+    });
+    $("#sign-out").on("click", function () {
+        try {
+            localStorage.removeItem("job-user");
+        } catch (error) {
+            alert("Sign-out could not be saved. Allow browser storage and try again.");
+            return;
+        }
+        user = null;
+        updateAccount();
+        $("#login-feedback").removeClass("text-danger").addClass("text-success").text("You are signed out.");
+    });
+    $("#contact-form").on("submit", function (event) {
+        event.preventDefault();
+        $("#contact-feedback").text("Form checked. This demo does not send messages.");
+    });
+}
+
+function setupFAQ() {
+    $(".faq-question").on("click", function () {
+        const button = $(this);
+        const expanded = button.attr("aria-expanded") === "true";
+        button.attr("aria-expanded", String(!expanded));
+        button.find(".faq-indicator").text(expanded ? "+" : "−");
+        $("#" + button.attr("aria-controls")).stop(true, true).slideToggle(200);
+    });
+}
+
+function setupRemoteJobs() {
+    if (!document.getElementById("api-results")) return;
+    let jobs = [];
+    let loaded = false;
+    let sourceMessage = "";
+    const cacheKey = "job-remote-cache";
+    const cacheAge = 6 * 60 * 60 * 1000;
+
+    function renderJobs() {
+        const query = $("#remote-search").val().trim().toLowerCase();
+        const type = $("#remote-type").val();
+        const results = $("#api-results");
+        results.empty();
+        let count = 0;
+        for (let i = 0; i < jobs.length; i++) {
+            const job = jobs[i];
+            const text = (job.title + " " + job.company_name + " " + job.candidate_required_location).toLowerCase();
+            if (!text.includes(query) || (type !== "all" && job.job_type !== type)) continue;
+            count++;
+            const column = $("<div class='col-12 col-md-6 col-lg-4 mb-3'></div>");
+            const card = $("<article class='box remote-card'></article>");
+            card.append($("<h3></h3>").text(job.title));
+            card.append($("<p></p>").text(job.company_name));
+            card.append($("<p></p>").text("Location: " + (job.candidate_required_location || "Check listing")));
+            card.append($("<p></p>").text("Type: " + (job.job_type || "Not specified").replace(/_/g, " ")));
+            card.append($("<p></p>").text("Salary: " + (job.salary || "Not specified")));
+            // Only link to the source provider, never execute API HTML descriptions.
+            if (typeof job.url === "string" && job.url.startsWith("https://remotive.com/")) {
+                card.append($("<a class='btn btn-primary' target='_blank' rel='noopener noreferrer'>View on Remotive</a>").attr("href", job.url));
+            }
+            column.append(card);
+            results.append(column);
+        }
+        $("#api-status").removeClass("text-danger").text(count === 0 ? "No matching jobs. Try another search or job type. " + sourceMessage : "Jobs found: " + count + ". " + sourceMessage);
+    }
+
+    $("#remote-search").on("input", function () { if (loaded) renderJobs(); });
+    $("#remote-type").on("change", function () { if (loaded) renderJobs(); });
+    $("#load-jobs").on("click", async function () {
+        const button = $(this);
+        const status = $("#api-status");
+        button.prop("disabled", true).text("Loading...");
+        $("#api-results").empty().attr("aria-busy", "true");
+        status.removeClass("text-danger").text("Loading remote jobs from Remotive...");
+        loaded = false;
+        try {
+            let cached = null;
+            try { cached = JSON.parse(readStorage(cacheKey)); } catch (error) { cached = null; }
+            if (cached && Array.isArray(cached.jobs) && Date.now() - cached.time < cacheAge) {
+                jobs = cached.jobs;
+                sourceMessage = "Saved results from " + new Date(cached.time).toLocaleString() + ".";
+            } else {
+                const controller = new AbortController();
+                const timer = setTimeout(function () { controller.abort(); }, 15000);
+                let data;
+                try {
+                    const response = await fetch("https://remotive.com/api/remote-jobs?category=software-dev&limit=50", { signal: controller.signal });
+                    if (!response.ok) throw new Error("Request failed");
+                    data = await response.json();
+                } finally {
+                    clearTimeout(timer);
+                }
+                if (!Array.isArray(data.jobs)) throw new Error("Invalid response");
+                jobs = data.jobs.map(function (job) {
+                    return {
+                        title: String(job.title || "Untitled position"),
+                        company_name: String(job.company_name || "Company not specified"),
+                        candidate_required_location: String(job.candidate_required_location || ""),
+                        job_type: String(job.job_type || ""),
+                        salary: String(job.salary || ""),
+                        category: String(job.category || ""),
+                        url: String(job.url || "")
+                    };
+                });
+                jobs = jobs.filter(function (job) {
+                    return /software|data|information technology|devops|qa|technical/i.test(job.category);
+                });
+                const time = Date.now();
+                saveStorage(cacheKey, JSON.stringify({ time: time, jobs: jobs }));
+                sourceMessage = "Retrieved from Remotive at " + new Date(time).toLocaleString() + ".";
+            }
+            loaded = true;
+            renderJobs();
+        } catch (error) {
+            jobs = [];
+            status.addClass("text-danger").text("Remote jobs could not be loaded. Check your connection and select Load jobs to retry.");
+        } finally {
+            button.prop("disabled", false).text("Load jobs");
+            $("#api-results").attr("aria-busy", "false");
+        }
+    });
 }

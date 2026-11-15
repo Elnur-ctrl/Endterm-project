@@ -7,8 +7,8 @@
     <title>Jobs - Job Finding</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/jquery-3.7.1.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 
 <body>
@@ -21,6 +21,12 @@
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <div class="header-tools">
+            <button id="theme-toggle" class="btn btn-outline-secondary btn-sm" type="button" aria-pressed="false">Dark mode</button>
+            <a id="sign-in-link" href="contact.html#sign-in" class="btn btn-primary btn-sm">Sign in</a>
+            <span id="account-status" role="status"></span>
+            <button id="sign-out" class="btn btn-outline-secondary btn-sm" type="button" hidden>Sign out</button>
+        </div>
     </header>
     <main class="container">
         <h1>IT jobs in Astana</h1>
@@ -148,11 +154,36 @@
                 </tbody>
             </table>
         </div>
+        <section id="remote-jobs" class="mt-5" aria-labelledby="remote-title">
+            <h2 id="remote-title">Remote IT jobs</h2>
+            <p>Explore remote opportunities beyond Astana. Location eligibility varies by employer.</p>
+            <p>Source: <a href="https://remotive.com/">Remotive</a>. Listings may be delayed; check details on the original page.</p>
+            <button id="load-jobs" type="button" class="btn btn-primary">Load jobs</button>
+            <div class="row mt-2 mb-3">
+                <div class="col-12 col-md-7">
+                    <label for="remote-search">Search loaded jobs</label>
+                    <input id="remote-search" class="form-control" type="search" placeholder="Position, company or location">
+                </div>
+                <div class="col-12 col-md-5">
+                    <label for="remote-type">Job type</label>
+                    <select id="remote-type" class="form-select">
+                        <option value="all">All types</option>
+                        <option value="full_time">Full time</option>
+                        <option value="contract">Contract</option>
+                        <option value="part_time">Part time</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="internship">Internship</option>
+                    </select>
+                </div>
+            </div>
+            <p id="api-status" role="status">Select Load jobs to request vacancies.</p>
+            <div id="api-results" class="row" aria-busy="false"></div>
+        </section>
     </main>
     <footer class="text-center p-4">
         <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
         <a href="https://www.instagram.com/">Instagram</a> | <a href="https://www.linkedin.com/">LinkedIn</a>
-        <p>© 2026 Job Finding. Student project.</p>
+        <p>© 2026 Job Finding. Student project. <a href="about.html#credits">Project credits</a></p>
     </footer>
 </body>
 

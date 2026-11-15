@@ -6,8 +6,8 @@
     <title>Contact - Job Finding</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/jquery-3.7.1.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <header class="container">
@@ -19,12 +19,18 @@
                 <a href="about.html">About</a>
                 <a class="active" href="contact.html">Contact</a>
         </nav>
+        <div class="header-tools">
+            <button id="theme-toggle" class="btn btn-outline-secondary btn-sm" type="button" aria-pressed="false">Dark mode</button>
+            <a id="sign-in-link" href="contact.html#sign-in" class="btn btn-primary btn-sm">Sign in</a>
+            <span id="account-status" role="status"></span>
+            <button id="sign-out" class="btn btn-outline-secondary btn-sm" type="button" hidden>Sign out</button>
+        </div>
     </header>
     <main class="container">
         <h1>Contact us</h1>
         <p>Ask about a job or leave your contact details.</p>
         <p>This is a demo form. It checks required fields but does not send messages.</p>
-        <form action="contact.html" method="get">
+        <form id="contact-form">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" required>
             <label for="email">Email</label>
@@ -32,6 +38,7 @@
             <label for="message">Message</label>
             <input id="message" name="message" type="text" required>
             <button class="btn btn-primary mt-3" type="submit">Check form</button>
+            <p id="contact-feedback" role="status"></p>
         </form>
         <section class="mt-4" aria-labelledby="registration-title">
     <h2 id="registration-title">Register</h2>
@@ -56,11 +63,24 @@
         <p id="register-feedback" class="mt-2" role="status"></p>
     </form>
 </section>
+        <section id="sign-in" class="mt-4" aria-labelledby="sign-in-title">
+            <h2 id="sign-in-title">Sign in</h2>
+            <p>Demo sign-in: enter your name and email to personalise this browser. No password is saved and no server account is created.</p>
+            <form id="sign-in-form" novalidate>
+                <label for="login-name">Name</label>
+                <input id="login-name" class="form-control" type="text" maxlength="60" autocomplete="name" required>
+                <label for="login-email">Email</label>
+                <input id="login-email" class="form-control" type="email" maxlength="120" autocomplete="email" required>
+                <button class="btn btn-primary mt-3" type="submit">Sign in</button>
+            </form>
+            <p id="login-feedback" class="mt-2" role="status"></p>
+            <p id="signed-in-message" hidden></p>
+        </section>
     </main>
     <footer class="text-center p-4">
         <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
         <a href="https://www.instagram.com/">Instagram</a> | <a href="https://www.linkedin.com/">LinkedIn</a>
-        <p>© 2026 Job Finding. Student project.</p>
+        <p>© 2026 Job Finding. Student project. <a href="about.html#credits">Project credits</a></p>
     </footer>
 </body>
 </html>
