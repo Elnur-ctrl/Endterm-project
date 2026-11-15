@@ -7,8 +7,8 @@
     <title>Home - Job Finding</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/jquery-3.7.1.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 
 <body>
@@ -21,6 +21,12 @@
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <div class="header-tools">
+            <button id="theme-toggle" class="btn btn-outline-secondary btn-sm" type="button" aria-pressed="false">Dark mode</button>
+            <a id="sign-in-link" href="contact.html#sign-in" class="btn btn-primary btn-sm">Sign in</a>
+            <span id="account-status" role="status"></span>
+            <button id="sign-out" class="btn btn-outline-secondary btn-sm" type="button" hidden>Sign out</button>
+        </div>
     </header>
     <main class="container">
         <div id="intro">
@@ -77,9 +83,9 @@
         </dialog>
     </main>
     <footer class="text-center p-4">
-        <p>Contact: <a href="mailto:AITU-Progect.com">AITU-Progect.com</a></p>
+        <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
         <a href="https://www.instagram.com/">Instagram</a> | <a href="https://www.linkedin.com/">LinkedIn</a>
-        <p>© 2026 Job Finding. Student project.</p>
+        <p>© 2026 Job Finding. Student project. <a href="about.html#credits">Project credits</a></p>
     </footer>
 </body>
 
