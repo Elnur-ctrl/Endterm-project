@@ -11,7 +11,7 @@ A Front End final project about IT careers in Astana and remote software jobs. I
 - Home: introduction and workplace gallery.
 - Jobs: example Astana jobs, search/filter, comparison table and live remote jobs.
 - Companies: workplaces and official links.
-- About: goals, FAQ and project credits.
+- About: goals, FAQ and team information.
 - Contact: contact/registration forms and demo sign-in.
 
 ## Features
@@ -35,8 +35,7 @@ The following responsibilities organise the final project review and defence:
 
 Each member must review the final code and confirm their actual contribution before submission.
 
-## Credits
-OpenAI ChatGPT assisted with code suggestions, documentation and testing during final project development. This support is also acknowledged on the About page and in the project report.
+## Resources
 
 API documentation: https://github.com/remotive-com/remote-jobs-api
 
