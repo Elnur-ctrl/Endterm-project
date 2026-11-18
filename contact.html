@@ -30,11 +30,11 @@
         <p>This is a demo form. It checks required fields but does not send messages.</p>
         <form id="contact-form">
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" required>
+            <input id="name" class="form-control" name="name" type="text" required>
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" required>
+            <input id="email" class="form-control" name="email" type="email" required>
             <label for="message">Message</label>
-            <input id="message" name="message" type="text" required>
+            <input id="message" class="form-control" name="message" type="text" required>
             <button class="btn btn-primary mt-3" type="submit">Check form</button>
             <p id="contact-feedback" role="status"></p>
         </form>
@@ -72,7 +72,7 @@
                 <button class="btn btn-primary mt-3" type="submit">Sign in</button>
             </form>
             <p id="login-feedback" class="mt-2" role="status"></p>
-            <p id="signed-in-message" hidden></p>
+            <p id="signed-in-message" class="text-break" hidden></p>
         </section>
     </main>
     <footer class="text-center p-4">

@@ -312,7 +312,8 @@ function setupSignIn() {
             feedback.text("Enter your name, up to 60 characters.");
             return;
         }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 120) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+            $("#login-email")[0].validity.typeMismatch || email.length > 120) {
             feedback.text("Enter a valid email address.");
             return;
         }
@@ -364,13 +365,15 @@ function setupRemoteJobs() {
     function renderJobs() {
         const query = $("#remote-search").val().trim().toLowerCase();
         const type = $("#remote-type").val();
+        const company = $("#remote-company").val();
         const results = $("#api-results");
         results.empty();
         let count = 0;
         for (let i = 0; i < jobs.length; i++) {
             const job = jobs[i];
             const text = (job.title + " " + job.company_name + " " + job.candidate_required_location).toLowerCase();
-            if (!text.includes(query) || (type !== "all" && job.job_type !== type)) continue;
+            if (!text.includes(query) || (type !== "all" && job.job_type !== type) ||
+                (company !== "" && job.company_name !== company)) continue;
             count++;
             const column = $("<div class='col-12 col-md-6 col-lg-4 mb-3'></div>");
             const card = $("<article class='box remote-card'></article>");
@@ -386,11 +389,16 @@ function setupRemoteJobs() {
             column.append(card);
             results.append(column);
         }
-        $("#api-status").removeClass("text-danger").text(count === 0 ? "No matching jobs. Try another search or job type. " + sourceMessage : "Jobs found: " + count + ". " + sourceMessage);
+        $("#api-status").removeClass("text-danger").text(count === 0 ? "No matching jobs. Try another search or filter. " + sourceMessage : "Jobs found: " + count + ". " + sourceMessage);
     }
 
     $("#remote-search").on("input", function () { if (loaded) renderJobs(); });
-    $("#remote-type").on("change", function () { if (loaded) renderJobs(); });
+    $("#remote-type, #remote-company").on("change", function () { if (loaded) renderJobs(); });
+    $("#remote-reset").on("click", function () {
+        $("#remote-search, #remote-company").val("");
+        $("#remote-type").val("all");
+        if (loaded) renderJobs();
+    });
     $("#load-jobs").on("click", async function () {
         const button = $(this);
         const status = $("#api-status");
@@ -434,6 +442,17 @@ function setupRemoteJobs() {
                 saveStorage(cacheKey, JSON.stringify({ time: time, jobs: jobs }));
                 sourceMessage = "Retrieved from Remotive at " + new Date(time).toLocaleString() + ".";
             }
+            const companies = [];
+            const companyFilter = $("#remote-company");
+            const selectedCompany = companyFilter.val();
+            companyFilter.empty().append($("<option></option>").val("").text("All companies"));
+            for (let i = 0; i < jobs.length; i++) {
+                const company = jobs[i].company_name;
+                if (companies.includes(company)) continue;
+                companies.push(company);
+                companyFilter.append($("<option></option>").val(company).text(company));
+            }
+            companyFilter.val(companies.includes(selectedCompany) ? selectedCompany : "");
             loaded = true;
             renderJobs();
         } catch (error) {

@@ -69,7 +69,6 @@ h3 {
 }
 
 #intro {
-    position: relative;
     background: var(--light);
     padding: 30px;
 }
@@ -107,11 +106,6 @@ h3 {
     background: #1c3c2d;
 }
 
-.work {
-    width: 100%;
-    max-width: 600px;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -134,16 +128,6 @@ form {
 label {
     display: block;
     margin-top: 12px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #aaa;
-}
-
-input:focus {
-    outline: 2px solid var(--blue);
 }
 
 footer {
@@ -266,7 +250,8 @@ html[data-bs-theme="dark"] dialog {
     color: var(--text);
     border-color: var(--line);
 }
-html[data-bs-theme="dark"] .btn-primary {
+html[data-bs-theme="dark"] .btn-primary,
+html[data-bs-theme="dark"] .btn-primary:active {
     background: #9cdbb9;
     color: #14251b;
     border-color: #9cdbb9;

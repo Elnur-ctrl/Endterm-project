@@ -157,12 +157,13 @@
             <p>Explore remote opportunities beyond Astana. Location eligibility varies by employer.</p>
             <p>Source: <a href="https://remotive.com/">Remotive</a>. Listings may be delayed; check details on the original page.</p>
             <button id="load-jobs" type="button" class="btn btn-primary">Load jobs</button>
+            <button id="remote-reset" type="button" class="btn btn-outline-secondary">Reset filters</button>
             <div class="row mt-2 mb-3">
-                <div class="col-12 col-md-7">
+                <div class="col-12 col-md-6">
                     <label for="remote-search">Search loaded jobs</label>
                     <input id="remote-search" class="form-control" type="search" placeholder="Position, company or location">
                 </div>
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-3">
                     <label for="remote-type">Job type</label>
                     <select id="remote-type" class="form-select">
                         <option value="all">All types</option>
@@ -171,6 +172,12 @@
                         <option value="part_time">Part time</option>
                         <option value="freelance">Freelance</option>
                         <option value="internship">Internship</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="remote-company">Company</label>
+                    <select id="remote-company" class="form-select">
+                        <option value="">All companies</option>
                     </select>
                 </div>
             </div>
