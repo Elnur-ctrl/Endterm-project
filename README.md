@@ -28,18 +28,24 @@ HTML5, CSS3, Bootstrap 5.3.3, JavaScript and jQuery 3.7.1. Bootstrap, jQuery, fo
 Local Astana listings are examples. Real remote listings come from [Remotive](https://remotive.com/); applications are made on the original listing. Demo table edits reset on refresh.
 
 ## Team responsibilities
-The following responsibilities organise the final project review and defence:
-- Azamat Merzemkhan: Jobs page, CRUD and remote API integration.
-- Yerbol Berdalin: Companies/About content, FAQ and search/filter review.
-- Yelnur Bizhan: Contact forms, demo sign-in and shared theme/gallery review.
 
-Each member must review the final code and confirm their actual contribution before submission.
+- Azamat Merzemkhan: Jobs page, CRUD comparison table and Remotive API integration.
+- Yerbol Berdalin: Companies and About pages, FAQ section and job search/filtering.
+- Yelnur Bizhan: Contact page, form validation, demo sign-in, theme switching and gallery.
 
 ## AI Usage Acknowledgement
 
 OpenAI ChatGPT was used as a supporting tool for code suggestions,
 debugging, explanations and checking compliance with the assignment
 requirements. Some AI-assisted code was incorporated into the project.
+
+## Project report
+
+The group report includes the project objectives, website structure,
+implemented features, development process, individual contributions,
+screenshots, project links and AI usage acknowledgement.
+
+[View the project report](Project_Report.pdf)
 
 ## Resources
 
