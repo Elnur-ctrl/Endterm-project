@@ -35,6 +35,12 @@ The following responsibilities organise the final project review and defence:
 
 Each member must review the final code and confirm their actual contribution before submission.
 
+## AI Usage Acknowledgement
+
+OpenAI ChatGPT was used as a supporting tool for code suggestions,
+debugging, explanations and checking compliance with the assignment
+requirements. Some AI-assisted code was incorporated into the project.
+
 ## Resources
 
 API documentation: https://github.com/remotive-com/remote-jobs-api
